@@ -38,7 +38,7 @@ export default function Home() {
                   height={24}
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  Mono Wallet
+                  MonoWallet for Business
                 </span>
               </a>
             </div>

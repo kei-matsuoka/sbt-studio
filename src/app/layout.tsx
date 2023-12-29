@@ -10,9 +10,9 @@ import GraphqlProvider from '@/components/GraphqlProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MonoWallet for Business',
+  title: 'SBT Studio',
   description:
-    'MonoWallet用のデジタル会員証を発行・管理するためのプラットフォームです。',
+    'Web3のデジタル会員証を発行・管理するためのアプリです。',
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={inter.className}>
         <WalletProvider>
           <GraphqlProvider>

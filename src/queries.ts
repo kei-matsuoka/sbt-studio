@@ -6,10 +6,30 @@ export const GET_CREATED_TOKENS = gql`
       tokens {
         id
         name
-        symbol
         imageURI
         description
-        createdAtTimestamp
+      }
+    }
+  }
+`;
+
+export const GET_CREATED_TOKEN = gql`
+  query GetCreatedToken($tokenId: ID!) {
+    createdToken(id: $tokenId) {
+      id
+      name
+      imageURI
+      description
+      maxSupply
+      burnAuth
+      createdAtTimestamp
+      mintedTokens {
+        tokenId
+        minter {
+          id
+        }
+        isBurned
+        mintedAtTimestamp
       }
     }
   }

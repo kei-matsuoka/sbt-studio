@@ -10,10 +10,15 @@ import SBTFactoryJson from '../abis/SBTFactory.json';
 import Dropzone from './Dropzone';
 import Modal from './Modal';
 import { parseEther } from 'viem';
+import { uploadImage, uploadJSON } from '@/utils/pinata';
+import { createMetadata } from '@/utils/common';
+import SubmitButton from './SubmitButton';
 
 type Inputs = {
   name: string;
   symbol: string;
+  maxSupply: number;
+  defaultBurnAuth: number;
   description: string;
   imageFile: FileList;
 };
@@ -21,7 +26,6 @@ type Inputs = {
 type ModalData = {
   creator: string;
   name: string;
-  symbol: string;
   description: string;
   image: string;
   sbtAddress: string;
@@ -71,31 +75,30 @@ export default function MembershipForm() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     try {
-      // if (!file) throw new Error('ファイルが選択されていません');
-      // const imageURI = await uploadImage(file);
-      // if (!imageURI) throw new Error('画像のアップロードに失敗しました');
+      const symbol = 'SBT';
+      const maxSupply = data.maxSupply || 0;
 
-      // // const metadata = createMetadata(data.name, imageURI, data.description);
-      // const metadata = createMetadata(
-      //   'Fitness Gym Membership',
-      //   imageURI,
-      //   'This is a membership token for the Fitness Gym. It is a soul-bound token (SBT) that can be used to redeem a 1 year membership at the Fitness Gym.'
-      // );
-      // const jsonURI = await uploadJSON(metadata);
-      // if (!jsonURI) throw new Error('メタデータのアップロードに失敗しました');
+      if (!file) throw new Error('Image file is required');
 
-      // const baseURI = jsonURI + '/';
-      // console.log(baseURI);
+      const imageURI = await uploadImage(file);
+      if (!imageURI) throw new Error('Upload image failed');
+
+      const metadata = createMetadata(data.name, imageURI, data.description);
+      const jsonURI = await uploadJSON(metadata);
+      if (!jsonURI) throw new Error('Upload JSON failed');
+
+      const baseURI = jsonURI + '/';
+      console.log(baseURI);
+
       write({
-        // args: [data.name, data.symbol, baseURI, imageURI, data.description],
         args: [
-          'Fitness Gym Membership',
-          'FGM',
-          'https://ipfs.io/ipfs/QmPccQEHMtSV1T9kFYFCr8Udev6pBqwfT9xpyexEmA6RWv/',
-          100,
-          0,
-          'https://ipfs.io/ipfs/QmWU8qrJm4ByGdSSyoaqvG4YbzAm4EZFHQG7L7LLCVfwvM',
-          'This is a membership token for the Fitness Gym. It is a soul-bound token (SBT) that can be used to redeem a 1 year membership at the Fitness Gym.',
+          data.name,
+          symbol,
+          baseURI,
+          maxSupply,
+          data.defaultBurnAuth,
+          imageURI,
+          data.description,
         ],
       });
     } catch (error) {
@@ -109,16 +112,16 @@ export default function MembershipForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-        {/* 名前 */}
+        {/* Name */}
         <div className="mb-6">
           <label
             htmlFor="name"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            名前
+            Name(Required)
           </label>
           <input
-            {...register('name', { required: '名前は必須です' })}
+            {...register('name', { required: 'Name is required' })}
             type="text"
             id="name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -127,34 +130,18 @@ export default function MembershipForm() {
           {errors.name && <ErrorMessage message={errors.name.message} />}
         </div>
 
-        {/* シンボル */}
-        <div className="mb-6">
-          <label
-            htmlFor="symbol"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            シンボル
-          </label>
-          <input
-            {...register('symbol', { required: 'シンボルは必須です' })}
-            type="text"
-            id="symbol"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="FGM"
-          />
-          {errors.symbol && <ErrorMessage message={errors.symbol.message} />}
-        </div>
-
-        {/* 説明 */}
+        {/* Description */}
         <div className="mb-6">
           <label
             htmlFor="description"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            説明
+            Description(Required)
           </label>
           <textarea
-            {...register('description', { required: '説明は必須です' })}
+            {...register('description', {
+              required: 'Description is required',
+            })}
             id="description"
             rows={4}
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -165,10 +152,10 @@ export default function MembershipForm() {
           )}
         </div>
 
-        {/* 画像ファイル */}
+        {/* Image File */}
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            画像ファイル
+            Image File(Required)
           </label>
           <div className="flex items-center justify-center">
             <label
@@ -184,7 +171,7 @@ export default function MembershipForm() {
               )}
               <input
                 {...register('imageFile', {
-                  required: '画像ファイルは必須です',
+                  required: 'Image file is required',
                 })}
                 type="file"
                 id="imageFile"
@@ -198,19 +185,61 @@ export default function MembershipForm() {
           )}
         </div>
 
-        {/* 送信ボタン */}
-        <div className="flex flex-col items-center">
-          <button
-            type="submit"
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 duration-100"
+        {/* Max Supply */}
+        <div className="mb-6">
+          <label
+            htmlFor="maxSupply"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            会員証を作成する
-          </button>
+            Max Supply
+          </label>
+          <input
+            {...register('maxSupply')}
+            type="number"
+            id="maxSupply"
+            aria-describedby="helper-text-explanation"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="100"
+          />
+        </div>
+
+        {/* Burn Auth */}
+        <div className="mb-6">
+          <label
+            htmlFor="defaultBurnAuth"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Burn Auth(Required)
+          </label>
+          <select
+            id="defaultBurnAuth"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            {...register('defaultBurnAuth', {
+              required: 'Burn Auth is required',
+            })}
+          >
+            <option value="" disabled selected>
+              Choose Burn Auth
+            </option>
+            <option value={0}>Issuer Only</option>
+            <option value={1}>Owner Only</option>
+            <option value={2}>Both</option>
+            <option value={3}>Neither</option>
+          </select>
+          {errors.defaultBurnAuth && (
+            <ErrorMessage message={errors.defaultBurnAuth.message} />
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex flex-col items-center">
+          <SubmitButton text="Create Token" />
           {isLoading && <Loader />}
-          {isError && <ErrorMessage message="エラーが発生しました" />}
+          {isError && <ErrorMessage message="Error" />}
         </div>
       </form>
-      {/* モーダル */}
+
+      {/* Modal */}
       {showModal && (
         <Modal
           onClose={() => {
@@ -223,16 +252,15 @@ export default function MembershipForm() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image src={src} alt="image" width={320} height={180} />
-            <p>名前: {modalData?.name}</p>
-            <p>シンボル: {modalData?.symbol}</p>
-            <p>説明: {modalData?.description}</p>
-            <p>アドレス: {modalData?.sbtAddress}</p>
+            <p>Name: {modalData?.name}</p>
+            <p>Description: {modalData?.description}</p>
+            <p>Address: {modalData?.sbtAddress}</p>
             <a
               href={`https://mumbai.polygonscan.com/tx/${data?.hash}`}
               target="_blank"
               className="text-blue-600 underline"
             >
-              トランザクション
+              Tx
             </a>
           </div>
         </Modal>

@@ -1,16 +1,15 @@
-import Link from 'next/link';
-
-export default function LinkButton({
-  href,
+export default function ModalButton({
   text,
+  handleOnClick,
 }: {
-  href: string;
   text: string;
+  handleOnClick: () => void;
 }) {
   return (
-    <Link
-      href={href}
-      className="flex text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    <button
+      type="submit"
+      className="flex text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 duration-100"
+      onClick={handleOnClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +19,7 @@ export default function LinkButton({
       >
         <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
       </svg>
-
       {text}
-    </Link>
+    </button>
   );
 }

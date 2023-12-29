@@ -4,7 +4,7 @@ import MembershipForm from '@/components/MembershipForm';
 export default function TokenCreate() {
   return (
     <>
-      <PageTitle title="CreateTokens" />
+      <PageTitle title="Create Token" />
       <MembershipForm />
     </>
   );

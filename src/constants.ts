@@ -15,3 +15,5 @@ export const pageConfig = [
     icon: '/user.svg',
   },
 ];
+
+export const tokenTableHeader = ['TOKEN ID', 'HOLDER', 'MINTED AT', 'STATUS'];

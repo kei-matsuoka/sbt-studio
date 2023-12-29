@@ -1,10 +1,11 @@
-import MembershipForm from "@/components/MembershipForm";
+import MembershipForm from '@/components/MembershipForm';
+import PageTitle from '@/components/PageTitle';
 
-export default function Dashboard() {
+export default function Home() {
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="mb-4 text-lg font-bold text-center">会員証を作成する</h1>
+    <>
+      <PageTitle title="Home" />
       <MembershipForm />
-    </div>
+    </>
   );
 }

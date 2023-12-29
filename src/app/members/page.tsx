@@ -1,3 +1,9 @@
+import PageTitle from '@/components/PageTitle';
+
 export default function Members() {
-  return <>会員一覧</>;
+  return (
+    <>
+      <PageTitle title="Members" />{' '}
+    </>
+  );
 }

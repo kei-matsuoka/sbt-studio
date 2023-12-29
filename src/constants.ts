@@ -10,7 +10,7 @@ export const pageConfig = [
     icon: '/identification.svg',
   },
   {
-    href: '/',
+    href: '/members',
     title: 'Members',
     icon: '/user.svg',
   },

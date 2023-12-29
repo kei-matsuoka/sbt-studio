@@ -6,11 +6,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContractWrite, useContractEvent } from 'wagmi';
 import ErrorMessage from './ErrorMessage';
 import Loader from './Loader';
-import { createMetadata } from '@/utils/common';
-import { uploadImage, uploadJSON } from '@/utils/pinata';
 import SBTFactoryJson from '../abis/SBTFactory.json';
 import Dropzone from './Dropzone';
 import Modal from './Modal';
+import { parseEther } from 'viem';
 
 type Inputs = {
   name: string;
@@ -45,13 +44,14 @@ export default function MembershipForm() {
   });
 
   const { data, isError, write } = useContractWrite({
-    address: '0xDd3E73Da01EFCAfF8Ad57Baa19F7dB21f99C7DC4',
+    address: '0x8EeD5Dac18AAbCA1AD12e2f4DDc50C57602a68ff',
     abi: SBTFactoryJson.abi,
     functionName: 'createMembershipSBT',
+    value: parseEther('0.01'),
   });
 
   useContractEvent({
-    address: '0xDd3E73Da01EFCAfF8Ad57Baa19F7dB21f99C7DC4',
+    address: '0x8EeD5Dac18AAbCA1AD12e2f4DDc50C57602a68ff',
     abi: SBTFactoryJson.abi,
     eventName: 'SBTCreated',
     listener(eventData: any) {
@@ -71,18 +71,32 @@ export default function MembershipForm() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     try {
-      if (!file) throw new Error('ファイルが選択されていません');
-      const imageURI = await uploadImage(file);
-      if (!imageURI) throw new Error('画像のアップロードに失敗しました');
+      // if (!file) throw new Error('ファイルが選択されていません');
+      // const imageURI = await uploadImage(file);
+      // if (!imageURI) throw new Error('画像のアップロードに失敗しました');
 
-      const metadata = createMetadata(data.name, imageURI, data.description);
-      const jsonURI = await uploadJSON(metadata);
-      if (!jsonURI) throw new Error('メタデータのアップロードに失敗しました');
+      // // const metadata = createMetadata(data.name, imageURI, data.description);
+      // const metadata = createMetadata(
+      //   'Fitness Gym Membership',
+      //   imageURI,
+      //   'This is a membership token for the Fitness Gym. It is a soul-bound token (SBT) that can be used to redeem a 1 year membership at the Fitness Gym.'
+      // );
+      // const jsonURI = await uploadJSON(metadata);
+      // if (!jsonURI) throw new Error('メタデータのアップロードに失敗しました');
 
-      const baseURI = jsonURI + '/';
-      console.log(baseURI);
+      // const baseURI = jsonURI + '/';
+      // console.log(baseURI);
       write({
-        args: [data.name, data.symbol, baseURI, imageURI, data.description],
+        // args: [data.name, data.symbol, baseURI, imageURI, data.description],
+        args: [
+          'Fitness Gym Membership',
+          'FGM',
+          'https://ipfs.io/ipfs/QmPccQEHMtSV1T9kFYFCr8Udev6pBqwfT9xpyexEmA6RWv/',
+          100,
+          0,
+          'https://ipfs.io/ipfs/QmWU8qrJm4ByGdSSyoaqvG4YbzAm4EZFHQG7L7LLCVfwvM',
+          'This is a membership token for the Fitness Gym. It is a soul-bound token (SBT) that can be used to redeem a 1 year membership at the Fitness Gym.',
+        ],
       });
     } catch (error) {
       console.error(error);

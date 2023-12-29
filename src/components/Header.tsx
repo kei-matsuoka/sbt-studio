@@ -27,15 +27,8 @@ export default function Header() {
               </svg>
             </button>
             <Link href="/" className="flex ms-2 md:me-24">
-              <Image
-                src="/logo.svg"
-                className="me-3"
-                alt="MonoWallet Logo"
-                width={24}
-                height={24}
-              />
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                MonoWallet for Business
+                SBT Studio
               </span>
             </Link>
           </div>

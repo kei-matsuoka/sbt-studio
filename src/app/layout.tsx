@@ -5,6 +5,7 @@ import WalletProvider from '@/components/WalletProvider';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Container from '@/components/Container';
+import GraphqlProvider from '@/components/GraphqlProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <WalletProvider>
-          <Header />
-          <Sidebar />
-          <Container>{children}</Container>
+          <GraphqlProvider>
+            <Header />
+            <Sidebar />
+            <Container>{children}</Container>
+          </GraphqlProvider>
         </WalletProvider>
       </body>
     </html>

@@ -1,19 +1,61 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { isAddress } from 'viem';
+import PageTitle from './PageTitle';
 import SubmitButton from './SubmitButton';
+import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
+import MembershipSBTJson from '../abis/MembershipSBT.json';
 
-export default function MiniForm() {
+type Inputs = {
+  receipients: string;
+};
+
+export default function MiniForm({
+  tokenId,
+  onClose,
+}: {
+  tokenId: string;
+  onClose: () => void;
+}) {
   const [tags, setTags] = useState<string[]>([]);
-  const onClose = (index: number) => {
+
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    formState: { errors, isDirty },
+  } = useForm<Inputs>({
+    mode: 'onBlur',
+  });
+
+  const { data, isError, isLoading, write } = useContractWrite({
+    address: tokenId as `0x${string}`,
+    abi: MembershipSBTJson.abi,
+    functionName: 'safeMintBatch',
+  });
+
+  const {
+    data: txData,
+    isError: txIsError,
+    isLoading: txIsLoading,
+  } = useWaitForTransaction({
+    hash: data?.hash,
+  });
+
+  // タグを削除する
+  const handleDeleteTag = (index: number) => {
     setTags([...tags.slice(0, index), ...tags.slice(index + 1)]);
   };
 
+  // Keyが押された時の処理
   const handleKeyDown = (e: any) => {
     // Backspaceが押されたら最後のタグを削除する
     if (e.key === 'Backspace' && e.currentTarget.value === '') {
-      onClose(tags.length - 1);
+      handleDeleteTag(tags.length - 1);
     }
     // Enterが押されてもタグに追加しない
     if (e.key === 'Enter') {
@@ -28,9 +70,10 @@ export default function MiniForm() {
     values.map((value: string) => value.toLowerCase());
     // 被っているvalueを削除
     const filteredValues = values.filter(
-      (value, index, self) => self.indexOf(value) === index
+      (value: string, index: number, self: string) =>
+        self.indexOf(value) === index
     );
-    // addressがEthereumアドレスかつ既存のタグに含まれていないものを抽出
+    // addressが有効かつ既存のタグに含まれていないものを抽出
     const newTags = filteredValues.filter(
       (address: string) => isAddress(address) && !tags.includes(address)
     );
@@ -41,18 +84,39 @@ export default function MiniForm() {
     }
   };
 
+  const onSubmit: SubmitHandler<Inputs> = async () => {
+    write({
+      args: [tags],
+    });
+  };
+
+  // tagsが変更されたら再度validateする
+  useEffect(() => {
+    trigger('receipients');
+  }, [tags]);
+
+  // txDataが存在したらモーダルを閉じてtagsをリセットする
+  useEffect(() => {
+    if (txData) {
+      setTags([]);
+      onClose();
+    }
+  }, [txData]);
+
   return (
     <form
+      onSubmit={handleSubmit(onSubmit)}
       className="bg-white border px-6 py-8 rounded-xl"
       onClick={(e) => e.stopPropagation()}
     >
+      <PageTitle title="Mint Token" />
       <label
         htmlFor="receipients"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
         Receipients(Required)
       </label>
-      <div className="flex flex-wrap text-gray-900 border w-[420px] gap-1 bg-gray-50 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-lg p-2.5 pb-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white mb-6">
+      <div className="flex flex-wrap text-gray-900 border w-[420px] gap-1 bg-gray-50 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-lg p-2.5 pb-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         {tags.map((tag, index) => {
           return (
             // タグ
@@ -69,7 +133,7 @@ export default function MiniForm() {
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 className="w-4 h-4 cursor-pointer"
-                onClick={() => onClose(index)}
+                onClick={() => handleDeleteTag(index)}
               >
                 <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
               </svg>
@@ -78,6 +142,10 @@ export default function MiniForm() {
         })}
 
         <input
+          {...register('receipients', {
+            validate: () =>
+              !isDirty || tags.length > 0 || 'Receipients is required',
+          })}
           type="text"
           id="receipients"
           className="flex-grow border-0 mb-1 outline-none bg-gray-50"
@@ -85,10 +153,15 @@ export default function MiniForm() {
           onChange={handleOnChange}
         />
       </div>
+      {errors.receipients && (
+        <ErrorMessage message={errors.receipients.message} />
+      )}
 
       {/* Submit Button */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mt-6">
         <SubmitButton text="Mint Token" />
+        {(isLoading || txIsLoading) && <Loader />}
+        {(isError || txIsError) && <ErrorMessage message="Error" />}
       </div>
     </form>
   );

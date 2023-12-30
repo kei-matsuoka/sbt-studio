@@ -41,6 +41,7 @@ export default function Token() {
   return (
     <>
       <PageTitle title={data ? data.createdToken.name : 'Token Detail'} />
+
       <div className="flex justify-between items-center mb-8">
         <SearchInput
           searchQuery={searchQuery}
@@ -51,6 +52,7 @@ export default function Token() {
           handleOnClick={() => setIsModalOpen(!isModalOpen)}
         />
       </div>
+
       {loading ? (
         <TokenTablePlaceholder />
       ) : (
@@ -59,7 +61,10 @@ export default function Token() {
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(!isModalOpen)}>
-          <MintForm />
+          <MintForm
+            tokenId={tokenId}
+            onClose={() => setIsModalOpen(!isModalOpen)}
+          />
         </Modal>
       )}
     </>

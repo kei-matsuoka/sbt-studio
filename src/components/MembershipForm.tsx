@@ -1,14 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useContractWrite, useContractEvent } from 'wagmi';
+import {
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 import ErrorMessage from './ErrorMessage';
 import Loader from './Loader';
 import SBTFactoryJson from '../abis/SBTFactory.json';
 import Dropzone from './Dropzone';
-import Modal from './Modal';
 import { parseEther } from 'viem';
 import { uploadImage, uploadJSON } from '@/utils/pinata';
 import { createMetadata } from '@/utils/common';
@@ -23,20 +25,10 @@ type Inputs = {
   imageFile: FileList;
 };
 
-type ModalData = {
-  creator: string;
-  name: string;
-  description: string;
-  image: string;
-  sbtAddress: string;
-} | null;
-
 export default function MembershipForm() {
   const [src, setSrc] = useState('');
   const [file, setFile] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);
-  const [modalData, setModalData] = useState<ModalData>(null);
-  const [showModal, setShowModal] = useState(false);
 
   const {
     register,
@@ -54,15 +46,8 @@ export default function MembershipForm() {
     value: parseEther('0.01'),
   });
 
-  useContractEvent({
-    address: '0x8EeD5Dac18AAbCA1AD12e2f4DDc50C57602a68ff',
-    abi: SBTFactoryJson.abi,
-    eventName: 'SBTCreated',
-    listener(eventData: any) {
-      setIsLoading(false);
-      setModalData(eventData[0].args);
-      setShowModal(true);
-    },
+  const { data: txData } = useWaitForTransaction({
+    hash: data?.hash,
   });
 
   const handleOnChange = async (e: any) => {
@@ -105,9 +90,24 @@ export default function MembershipForm() {
       console.error(error);
       setIsLoading(false);
     }
-    reset();
-    setFile(undefined);
   };
+
+  // txDataが存在したらデータをリセットしてローディングを終了する
+  useEffect(() => {
+    if (txData) {
+      reset();
+      setFile(undefined);
+      setSrc('');
+      setIsLoading(false);
+    }
+  }, [txData]);
+
+  // エラーが発生したらローディングを終了する
+  useEffect(() => {
+    if (isError) {
+      setIsLoading(false);
+    }
+  }, [isError]);
 
   return (
     <>
@@ -238,33 +238,6 @@ export default function MembershipForm() {
           {isError && <ErrorMessage message="Error" />}
         </div>
       </form>
-
-      {/* Modal */}
-      {showModal && (
-        <Modal
-          onClose={() => {
-            setShowModal(!showModal);
-            setSrc('');
-          }}
-        >
-          <div
-            className="bg-white px-6 py-8 rounded-xl border"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image src={src} alt="image" width={320} height={180} />
-            <p>Name: {modalData?.name}</p>
-            <p>Description: {modalData?.description}</p>
-            <p>Address: {modalData?.sbtAddress}</p>
-            <a
-              href={`https://mumbai.polygonscan.com/tx/${data?.hash}`}
-              target="_blank"
-              className="text-blue-600 underline"
-            >
-              Tx
-            </a>
-          </div>
-        </Modal>
-      )}
     </>
   );
 }

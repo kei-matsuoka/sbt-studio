@@ -26,7 +26,7 @@ export default function Header() {
               </svg>
             </button>
             <Link href="/" className="flex ms-2 md:me-24">
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+              <span className="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">
                 SBT Studio
               </span>
             </Link>

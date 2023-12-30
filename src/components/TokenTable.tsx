@@ -1,7 +1,11 @@
 import { tokenTableHeader } from '@/constants';
-import { FormattedToken } from '@/types';
+import { FormattedMintedToken } from '@/types';
 
-export default function TokenTable({ tokens }: { tokens: FormattedToken[] }) {
+export default function TokenTable({
+  tokens,
+}: {
+  tokens: FormattedMintedToken[];
+}) {
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -15,7 +19,7 @@ export default function TokenTable({ tokens }: { tokens: FormattedToken[] }) {
           </tr>
         </thead>
         <tbody>
-          {tokens.map((token: FormattedToken) => (
+          {tokens.map((token: FormattedMintedToken) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               key={token.tokenId}

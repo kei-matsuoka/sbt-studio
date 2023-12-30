@@ -5,14 +5,15 @@ import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import PageTitle from '@/components/PageTitle';
 import SearchInput from '@/components/SearchInput';
-import LinkButton from '@/components/LinkButton';
 import TokenTable from '@/components/TokenTable';
 import { GET_CREATED_TOKEN } from '../../../queries';
-import { formatMintedTokens } from '@/utils/token';
+import { formatCreatedToken, formatMintedTokens } from '@/utils/token';
 import Modal from '@/components/Modal';
 import MintForm from '@/components/MintForm';
 import ModalButton from '@/components/ModalButton';
 import TokenTablePlaceholder from '@/components/TokenTablePlaceholder';
+import TokenDetail from '@/components/TokenDetail';
+import TokenDetailPlaceholder from '@/components/TokenDetailPlaceholder';
 
 export default function Token() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,13 +37,23 @@ export default function Token() {
         token.minter.id.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
+  const formattedToken = data
+    ? formatCreatedToken(data.createdToken)
+    : undefined;
+
   if (error) return <p>{error.message}</p>;
 
   return (
     <>
       <PageTitle title={data ? data.createdToken.name : 'Token Detail'} />
 
-      <div className="flex justify-between items-center mb-8">
+      {loading || !formattedToken ? (
+        <TokenDetailPlaceholder />
+      ) : (
+        <TokenDetail token={formattedToken} />
+      )}
+
+      <div className="flex justify-between items-center mb-4">
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -53,7 +64,7 @@ export default function Token() {
         />
       </div>
 
-      {loading ? (
+      {loading || !filteredTokens ? (
         <TokenTablePlaceholder />
       ) : (
         <TokenTable tokens={filteredTokens} />

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {
@@ -29,6 +30,7 @@ export default function MembershipForm() {
   const [src, setSrc] = useState('');
   const [file, setFile] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -99,6 +101,7 @@ export default function MembershipForm() {
       setFile(undefined);
       setSrc('');
       setIsLoading(false);
+      router.push('/tokens');
     }
   }, [txData]);
 

@@ -1,7 +1,6 @@
 import { tokenTableHeader } from '@/constants';
-import { FormattedToken } from '@/types';
 
-export default function TokenTable({ tokens }: { tokens: FormattedToken[] }) {
+export default function TokenTable() {
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -25,16 +24,16 @@ export default function TokenTable({ tokens }: { tokens: FormattedToken[] }) {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                <div className="h-2 bg-gray-300 rounded" />
+                <div className="h-2 bg-gray-300 rounded animate-pulse" />
               </th>
               <td className="px-6 py-4">
-                <div className="h-2 bg-gray-300 rounded" />
+                <div className="h-2 bg-gray-300 rounded animate-pulse" />
               </td>
               <td className="px-6 py-4">
-                <div className="h-2 bg-gray-300 rounded" />
+                <div className="h-2 bg-gray-300 rounded animate-pulse" />
               </td>
               <td className="px-6 py-4">
-                <div className="h-2 bg-gray-300 rounded" />
+                <div className="h-2 bg-gray-300 rounded animate-pulse" />
               </td>
             </tr>
           ))}

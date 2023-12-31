@@ -6,6 +6,14 @@ export type Token = {
   createdAtTimestamp: string;
 };
 
+export type TokenConfig = {
+  id: string;
+  name: string;
+  imageURI: string;
+  description: string;
+  interfaceId: string;
+};
+
 export type MintedToken = {
   tokenId: string;
   minter: {

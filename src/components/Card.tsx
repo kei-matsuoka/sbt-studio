@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Token } from '@/types';
+import { Token, TokenConfig } from '@/types';
 
-export default function Card({ token }: { token: Token }) {
+export default function Card({
+  page,
+  token,
+}: {
+  page: string;
+  token: Token | TokenConfig;
+}) {
   return (
     <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:scale-[1.03] transform transition duration-100 ease-in-out">
-      <Link href={`tokens/${token.id}`}>
+      <Link href={`${page}/${token.id}`}>
         <Image
           src={token.imageURI}
           alt={token.name}

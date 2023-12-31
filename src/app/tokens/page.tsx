@@ -39,7 +39,7 @@ export default function Tokens() {
         {loading
           ? [...Array(9)].map((_, i) => <CardPlaceholder key={i} />)
           : filteredTokens.map((token: Token) => (
-              <Card token={token} key={token.id} />
+              <Card page="tokens" token={token} key={token.id} />
             ))}
       </div>
     </>

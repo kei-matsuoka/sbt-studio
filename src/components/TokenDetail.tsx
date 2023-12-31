@@ -9,7 +9,7 @@ export default function TokenDetail({
   return (
     <div className="flex gap-4 mb-6">
       <div className="flex flex-col min-w-[320px] gap-2">
-        <Image src={token.imageURI} alt={token.name} width={320} height={180} />
+        <Image src={token.imageURI} alt={token.name} width={320} height={180} className='rounded-lg' />
         <a
           href={`https://mumbai.polygonscan.com/address/${token.id}`}
           target="_blank"

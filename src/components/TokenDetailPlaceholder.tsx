@@ -2,7 +2,7 @@ export default function TokenDetailPlaceholder() {
   return (
     <div className="flex gap-4 mb-6 animate-pulse">
       <div className="flex flex-col min-w-[320px] gap-2">
-        <div className="flex items-center justify-center h-[180px] bg-gray-300 dark:bg-gray-700">
+        <div className="flex items-center justify-center h-[180px] bg-gray-300 dark:bg-gray-700 rounded-lg">
           <svg
             className="w-10 h-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"

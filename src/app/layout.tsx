@@ -11,8 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SBT Studio',
-  description:
-    'Web3のデジタル会員証を発行・管理するためのアプリです。',
+  description: 'Web3のデジタル会員証を発行・管理するためのアプリです。',
 };
 
 export default function RootLayout({
@@ -21,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="en">
       <body className={inter.className}>
         <WalletProvider>
           <GraphqlProvider>

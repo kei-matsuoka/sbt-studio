@@ -1,7 +1,11 @@
 'use client';
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  lightTheme,
+} from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { polygon, polygonMumbai } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
@@ -34,7 +38,15 @@ export default function WalletProvider({
 
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+      <RainbowKitProvider
+        chains={chains}
+        theme={lightTheme({
+          accentColor: '#000',
+          borderRadius: 'medium',
+        })}
+      >
+        {children}
+      </RainbowKitProvider>
     </WagmiConfig>
   );
 }

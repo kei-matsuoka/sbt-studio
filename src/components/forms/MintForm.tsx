@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { isAddress } from 'viem';
-import PageTitle from './PageTitle';
-import SubmitButton from './SubmitButton';
-import Loader from './Loader';
-import ErrorMessage from './ErrorMessage';
-import MembershipSBTJson from '../abis/MembershipSBT.json';
+import PageTitle from '../PageTitle';
+import SubmitButton from '../SubmitButton';
+import Loader from '../Loader';
+import ErrorMessage from '../ErrorMessage';
+import MembershipSBTJson from '@/abis/MembershipSBT.json';
 
 type Inputs = {
   receipients: string;

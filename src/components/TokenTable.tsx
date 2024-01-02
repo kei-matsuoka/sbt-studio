@@ -3,9 +3,15 @@ import { FormattedMintedToken } from '@/types';
 
 export default function TokenTable({
   tokens,
+  burnAuth,
+  handleBurn,
 }: {
   tokens: FormattedMintedToken[];
+  burnAuth: number;
+  handleBurn: (tokenId: number) => void;
 }) {
+  const isBurnAuth = burnAuth === 0 || 2;
+
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -41,7 +47,18 @@ export default function TokenTable({
               </td>
 
               <td className="px-6 py-4">{token.formattedDate}</td>
-              <td className="px-6 py-4">{token.status}</td>
+              <td className="px-6">
+                {isBurnAuth && (token.status !== 'Burned') ? (
+                  <button
+                    className="text-white bg-blue-700 hover:bg-blue-800 rounded-md text-xs px-3.5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
+                    onClick={() => handleBurn(token.tokenId)}
+                  >
+                    Burn
+                  </button>
+                ) : (
+                  token.status
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

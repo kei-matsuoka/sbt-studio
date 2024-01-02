@@ -14,7 +14,7 @@ export type TokenConfig = {
 };
 
 export type MintedToken = {
-  tokenId: string;
+  tokenId: number;
   minter: {
     id: string;
   };
@@ -23,7 +23,7 @@ export type MintedToken = {
 };
 
 export type FormattedMintedToken = {
-  tokenId: string;
+  tokenId: number;
   minter: {
     id: string;
   };

@@ -38,9 +38,11 @@ export default function Tokens() {
       <div className="flex flex-wrap gap-3">
         {loading
           ? [...Array(9)].map((_, i) => <CardPlaceholder key={i} />)
-          : filteredTokens.map((token: Token) => (
+          : filteredTokens
+          ? filteredTokens.map((token: Token) => (
               <Card page="tokens" token={token} key={token.id} />
-            ))}
+            ))
+          : 'Data not found'}
       </div>
     </>
   );

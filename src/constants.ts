@@ -38,7 +38,6 @@ export const tokenConfig = [
     description:
       'ERC20 is a technical standard used for smart contracts on the Ethereum blockchain for implementing tokens. ERC stands for Ethereum Request for Comment, and 20 is the number that was assigned to this request.',
     imageURI: '/coin.png',
-    interfaceId: '0x36372b07',
   },
   {
     id: 'erc721',
@@ -46,7 +45,6 @@ export const tokenConfig = [
     description:
       'ERC721 is a free, open standard that describes how to build non-fungible or unique tokens on the Ethereum blockchain. While most tokens are fungible (every token is the same as every other token), ERC721 tokens are all unique.',
     imageURI: '/nft.png',
-    interfaceId: '0x80ac58cd',
   },
   {
     id: 'erc1155',
@@ -54,7 +52,6 @@ export const tokenConfig = [
     description:
       'ERC1155 is a standard interface for contracts that manage multiple token types. It is inspired by and inherits from ERC721, but unlike ERC721, ERC1155 tokens are fungible and minted in batches.',
     imageURI: '/nfts.png',
-    interfaceId: '0xd9b67a26',
   },
 ];
 

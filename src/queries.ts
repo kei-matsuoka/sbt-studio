@@ -8,6 +8,14 @@ export const GET_CREATED_TOKENS = gql`
         name
         imageURI
         description
+        mintedTokens {
+          tokenId
+          minter {
+            id
+          }
+          isBurned
+          mintedAtTimestamp
+        }
       }
     }
   }

@@ -3,7 +3,7 @@ export type Token = {
   name: string;
   imageURI: string;
   description: string;
-  createdAtTimestamp: string;
+  mintedTokens: MintedToken[];
 };
 
 export type TokenConfig = {
@@ -11,7 +11,6 @@ export type TokenConfig = {
   name: string;
   imageURI: string;
   description: string;
-  interfaceId: string;
 };
 
 export type MintedToken = {

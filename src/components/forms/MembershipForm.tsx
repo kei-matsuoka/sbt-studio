@@ -39,7 +39,7 @@ export default function MembershipForm() {
   });
 
   const { data, isError, write } = useContractWrite({
-    address: '0x8EeD5Dac18AAbCA1AD12e2f4DDc50C57602a68ff',
+    address: '0xb264Da2E6E7cDbc5d9Ad9C57562acc618fc78190',
     abi: SBTFactoryJson.abi,
     functionName: 'createMembershipSBT',
     value: parseEther('0.01'),

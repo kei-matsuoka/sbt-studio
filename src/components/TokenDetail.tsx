@@ -59,7 +59,7 @@ export default function TokenDetail({
             </p>
           </div>
           <div className="flex flex-col items-center">
-            <p className="text-sm">Owners</p>
+            <p className="text-sm">Holders</p>
             <p className="text-sm text-gray-600">{token.owners}</p>
           </div>
           <div className="flex flex-col items-center">

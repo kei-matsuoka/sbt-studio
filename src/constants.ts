@@ -55,4 +55,4 @@ export const tokenConfig = [
   },
 ];
 
-export const tokenTableHeader = ['TOKEN ID', 'HOLDER', 'MINTED AT', 'STATUS'];
+export const tokenTableHeader = ['TOKEN ID', 'HOLDER', 'MINTED AT', 'BURN'];

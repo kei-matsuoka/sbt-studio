@@ -23,9 +23,9 @@ function formatEthAddress(address: string): string {
 function formatBurnAuth(burnAuth: number): string {
   switch (burnAuth) {
     case 0:
-      return 'Issuer Only';
+      return 'Creator Only';
     case 1:
-      return 'Owner Only';
+      return 'Holder Only';
     case 2:
       return 'Both';
     case 3:
@@ -38,7 +38,7 @@ function formatBurnAuth(burnAuth: number): string {
 export function formatMintedTokens(tokens: MintedToken[]) {
   return tokens.map((token) => ({
     ...token,
-    status: token.isBurned ? 'Burned' : 'Active',
+    status: token.isBurned ? 'Burned' : 'Not Burned',
     formattedDate: convertTimestampToFormattedDate(token.mintedAtTimestamp),
   }));
 }

@@ -34,7 +34,7 @@ export default function TokenDetailPlaceholder() {
             <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
           </div>
           <div className="flex flex-col items-center">
-            <p className="text-sm">Owners</p>
+            <p className="text-sm">Holders</p>
             <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
           </div>
           <div className="flex flex-col items-center">

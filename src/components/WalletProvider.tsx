@@ -41,7 +41,7 @@ export default function WalletProvider({
       <RainbowKitProvider
         chains={chains}
         theme={lightTheme({
-          accentColor: '#000',
+          accentColor: '#A92CDE',
           borderRadius: 'medium',
         })}
       >

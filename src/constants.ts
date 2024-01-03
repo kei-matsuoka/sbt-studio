@@ -56,3 +56,38 @@ export const tokenConfig = [
 ];
 
 export const tokenTableHeader = ['TOKEN ID', 'HOLDER', 'MINTED AT', 'BURN'];
+
+export const quickLinks = [
+  {
+    href: '/tokens/create',
+    src: '/membership.png',
+    alt: 'Membership Token',
+    title: 'Create Membership Token',
+    description:
+      'Create your own membership token and distribute it to your community.',
+  },
+  {
+    href: '/airdrop/erc20',
+    src: '/coin.png',
+    alt: 'ERC20',
+    title: 'Airdrop ERC20 Token',
+    description:
+      'Airdrop your ERC20 token to your community and grow your community.',
+  },
+  {
+    href: '/airdrop/erc721',
+    src: '/nft.png',
+    alt: 'ERC721',
+    title: 'Airdrop ERC721 Token',
+    description:
+      'Airdrop your ERC721 token to your community and grow your community.',
+  },
+  {
+    href: '/airdrop/erc1155',
+    src: '/nfts.png',
+    alt: 'ERC1155',
+    title: 'Airdrop ERC1155 Token',
+    description:
+      'Airdrop your ERC1155 token to your community and grow your community.',
+  },
+];

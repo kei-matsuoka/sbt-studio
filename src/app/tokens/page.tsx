@@ -7,7 +7,7 @@ import PageTitle from '@/components/PageTitle';
 import SearchInput from '@/components/SearchInput';
 import Card from '@/components/Card';
 import CardPlaceholder from '@/components/CardPlaceholder';
-import { GET_CREATED_TOKENS } from '../../queries';
+import { GET_CREATED_TOKENS } from '@/queries';
 import { Token } from '@/types';
 import LinkButton from '@/components/LinkButton';
 

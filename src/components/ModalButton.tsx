@@ -8,7 +8,7 @@ export default function ModalButton({
   return (
     <button
       type="submit"
-      className="flex text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 duration-100"
+      className="flex text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:scale-[1.03] transform transition duration-100 ease-in-out"
       onClick={handleOnClick}
     >
       <svg

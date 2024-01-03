@@ -48,9 +48,9 @@ export default function TokenTable({
 
               <td className="px-6 py-4">{token.formattedDate}</td>
               <td className="px-6">
-                {isBurnAuth && (token.status !== 'Burned') ? (
+                {isBurnAuth && token.status !== 'Burned' ? (
                   <button
-                    className="text-white bg-blue-700 hover:bg-blue-800 rounded-md text-xs px-3.5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
+                    className="text-white rounded-md text-xs px-3.5 py-2 bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:scale-[1.03] transform transition duration-100 ease-in-out"
                     onClick={() => handleBurn(token.tokenId)}
                   >
                     Burn

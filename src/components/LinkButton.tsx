@@ -10,7 +10,7 @@ export default function LinkButton({
   return (
     <Link
       href={href}
-      className="flex text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"
+      className="flex items-center text-white font-medium rounded-lg text-sm px-5 py-2.5 bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:scale-[1.03] transform transition duration-100 ease-in-out"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Header() {
@@ -25,7 +26,8 @@ export default function Header() {
                 ></path>
               </svg>
             </button>
-            <Link href="/" className="flex ms-2 md:me-24">
+            <Link href="/" className="flex items-center ms-2 md:me-24 gap-2">
+              <Image src="/logo.png" alt="Logo" width={32} height={32} />
               <span className="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">
                 SBT Studio
               </span>

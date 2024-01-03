@@ -2,9 +2,9 @@ export default function TokenDetailPlaceholder() {
   return (
     <div className="flex gap-4 mb-6 animate-pulse">
       <div className="flex flex-col min-w-[320px] gap-2">
-        <div className="flex items-center justify-center h-[180px] bg-gray-300 dark:bg-gray-700 rounded-lg">
+        <div className="flex items-center justify-center h-[180px] bg-gray-300 rounded-lg">
           <svg
-            className="w-10 h-10 text-gray-200 dark:text-gray-600"
+            className="w-10 h-10 text-gray-200"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -14,36 +14,36 @@ export default function TokenDetailPlaceholder() {
             <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
           </svg>
         </div>
-        <div className="h-6 bg-gray-200 rounded-full dark:bg-gray-700" />
+        <div className="h-6 bg-gray-200 rounded-full" />
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
           <p>Name</p>
-          <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700" />
+          <div className="h-4 bg-gray-200 rounded-full" />
         </div>
         <div className="flex flex-col">
           <p>Description</p>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700" />
+          <div className="h-2 bg-gray-200 rounded-full mb-1" />
+          <div className="h-2 bg-gray-200 rounded-full mb-1" />
+          <div className="h-2 bg-gray-200 rounded-full mb-1" />
+          <div className="h-2 bg-gray-200 rounded-full" />
         </div>
         <div className="flex gap-6">
           <div className="flex flex-col items-center">
             <p className="text-sm">Supply</p>
-            <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
+            <div className="h-3 w-10 bg-gray-200 rounded-full" />
           </div>
           <div className="flex flex-col items-center">
             <p className="text-sm">Holders</p>
-            <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
+            <div className="h-3 w-10 bg-gray-200 rounded-full" />
           </div>
           <div className="flex flex-col items-center">
             <p className="text-sm">Date Created</p>
-            <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
+            <div className="h-3 w-10 bg-gray-200 rounded-full" />
           </div>
           <div className="flex flex-col items-center">
             <p className="text-sm">Burn Auth</p>
-            <div className="h-3 w-10 bg-gray-200 rounded-full dark:bg-gray-700" />
+            <div className="h-3 w-10 bg-gray-200 rounded-full" />
           </div>
         </div>
       </div>

@@ -4,13 +4,13 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Header() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-white shadow dark:bg-gray-800">
+    <header className="fixed top-0 z-50 w-full bg-white shadow">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <button
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100"
             >
               <svg
                 className="w-6 h-6"
@@ -28,7 +28,7 @@ export default function Header() {
             </button>
             <Link href="/" className="flex items-center ms-2 md:me-24 gap-2">
               <Image src="/logo.png" alt="Logo" width={32} height={32} />
-              <span className="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">
+              <span className="self-center text-xl font-bold sm:text-2xl whitespace-nowrap">
                 SBT Studio
               </span>
             </Link>

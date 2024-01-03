@@ -10,7 +10,7 @@ export default function Card({
   token: Token | TokenConfig;
 }) {
   return (
-    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:scale-[1.03] transform transition duration-100 ease-in-out">
+    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow hover:scale-[1.03] transform transition duration-100 ease-in-out">
       <Link href={`${page}/${token.id}`}>
         <Image
           src={token.imageURI}
@@ -20,10 +20,10 @@ export default function Card({
           className="rounded-t-lg"
         />
         <div className="p-5">
-          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
             {token.name}
           </h5>
-          <p className="mb-3 font-normal text-sm text-gray-700 dark:text-gray-400">
+          <p className="mb-3 font-normal text-sm text-gray-700">
             {token.description}
           </p>
         </div>

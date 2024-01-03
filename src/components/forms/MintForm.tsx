@@ -112,11 +112,11 @@ export default function MiniForm({
       <PageTitle title="Mint Token" />
       <label
         htmlFor="receipients"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="block mb-2 text-sm font-medium text-gray-900"
       >
         Receipients(Required)
       </label>
-      <div className="flex flex-wrap text-gray-900 border w-[420px] gap-1 bg-gray-50 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-lg p-2.5 pb-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+      <div className="flex flex-wrap text-gray-900 border w-[420px] gap-1 bg-gray-50 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-lg p-2.5 pb-1.5">
         {tags.map((tag, index) => {
           return (
             // タグ

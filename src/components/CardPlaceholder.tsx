@@ -1,9 +1,9 @@
 export default function CardPlaceholder() {
   return (
-    <div className="w-80 border border-gray-200 rounded-lg shadow animate-pulse dark:border-gray-700">
-      <div className="flex items-center justify-center h-[180px] bg-gray-300 rounded-t-lg dark:bg-gray-700">
+    <div className="w-80 border border-gray-200 rounded-lg shadow animate-pulse">
+      <div className="flex items-center justify-center h-[180px] bg-gray-300 rounded-t-lg">
         <svg
-          className="w-10 h-10 text-gray-200 dark:text-gray-600"
+          className="w-10 h-10 text-gray-200"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -14,11 +14,11 @@ export default function CardPlaceholder() {
         </svg>
       </div>
       <div className="p-5">
-        <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-2" />
-        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1.5" />
-        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1.5" />
-        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-1.5" />
-        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-3" />
+        <div className="h-3 bg-gray-200 rounded-full w-48 mb-2" />
+        <div className="h-2 bg-gray-200 rounded-full mb-1.5" />
+        <div className="h-2 bg-gray-200 rounded-full mb-1.5" />
+        <div className="h-2 bg-gray-200 rounded-full mb-1.5" />
+        <div className="h-2 bg-gray-200 rounded-full mb-3" />
       </div>
       <span className="sr-only">Loading...</span>
     </div>

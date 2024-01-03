@@ -19,7 +19,7 @@ export default function TokenDetail({
         <a
           href={`https://mumbai.polygonscan.com/address/${token.id}`}
           target="_blank"
-          className="flex gap-2 w-fit text-gray-900 bg-gray-100 border border-gray-400 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600"
+          className="flex gap-2 w-fit text-gray-900 bg-gray-100 border border-gray-400 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

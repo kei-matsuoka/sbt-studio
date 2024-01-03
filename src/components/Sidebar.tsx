@@ -1,8 +1,58 @@
-import Image from 'next/image';
+'use client';
+
 import Link from 'next/link';
-import { pageConfig } from '@/constants';
+import { usePathname } from 'next/navigation';
+import Home from './icons/Home';
+import Identification from './icons/Identification';
+import Cloud from './icons/Cloud';
+import Chat from './icons/Chat';
+import Chart from './icons/Chart';
+import Code from './icons/Code';
 
 export default function Sidebar() {
+  const path = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return path === '/';
+    } else {
+      return path.includes(href);
+    }
+  };
+
+  const pageConfig = [
+    {
+      href: '/',
+      title: 'Home',
+      icon: <Home />,
+    },
+    {
+      href: '/tokens',
+      title: 'Tokens',
+      icon: <Identification />,
+    },
+    {
+      href: '/airdrop',
+      title: 'Airdrop',
+      icon: <Cloud />,
+    },
+    {
+      href: '/messaging',
+      title: 'Messaging',
+      icon: <Chat />,
+    },
+    {
+      href: '/analytics',
+      title: 'Analytics',
+      icon: <Chart />,
+    },
+    {
+      href: '/integration',
+      title: 'Integration',
+      icon: <Code />,
+    },
+  ];
+
   return (
     <nav className="fixed top-0 left-0 z-40 w-52 h-screen pt-20 transition-transform -translate-x-full bg-white  shadow-md sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
@@ -11,14 +61,13 @@ export default function Sidebar() {
             <li key={page.href}>
               <Link
                 href={page.href}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={`flex items-center p-2 ${
+                  isActive(page.href)
+                    ? 'text-fuchsia-600'
+                    : 'text-gray-900 dark:text-white hover:text-fuchsia-600 dark:hover:bg-gray-700 duration-100'
+                }`}
               >
-                <Image
-                  src={page.icon}
-                  alt={page.title}
-                  width={24}
-                  height={24}
-                />
+                {page.icon}
                 <span className="ms-3">{page.title}</span>
               </Link>
             </li>

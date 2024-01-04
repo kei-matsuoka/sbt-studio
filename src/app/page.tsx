@@ -62,6 +62,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             {quickLinks.map((link) => (
               <HorizontalCard
+                key={link.title}
                 href={link.href}
                 src={link.src}
                 alt={link.alt}

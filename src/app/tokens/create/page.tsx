@@ -1,11 +1,11 @@
 import PageTitle from '@/components/PageTitle';
-import MembershipForm from '@/components/forms/MembershipForm';
+import CreateForm from '@/components/forms/CreateForm';
 
 export default function TokenCreate() {
   return (
     <>
       <PageTitle title="Create Token" />
-      <MembershipForm />
+      <CreateForm />
     </>
   );
 }

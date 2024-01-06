@@ -42,7 +42,7 @@ export default function CreateForm() {
   });
 
   const { data, isError, write } = useContractWrite({
-    address: '0xb264Da2E6E7cDbc5d9Ad9C57562acc618fc78190',
+    address: '0x80bE32C2549Fb64DDafBe34139C7D75A2BB865bf',
     abi: SBTFactoryJson.abi,
     functionName: 'createMembershipSBT',
     value: parseEther('0.01'),

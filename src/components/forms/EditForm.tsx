@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { useQuery } from '@apollo/client';
-import { parseEther } from 'viem';
-import SBTFactoryJson from '../../abis/SBTFactory.json';
+import MembershipSBTJson from '@/abis/MembershipSBT.json';
 import EditName from '../inputs/EditName';
 import Description from '../inputs/Description';
 import EditImageFile from '../inputs/EditImageFile';
@@ -53,10 +52,9 @@ export default function EditForm() {
   });
 
   const { data, isError, write } = useContractWrite({
-    address: '0x80bE32C2549Fb64DDafBe34139C7D75A2BB865bf',
-    abi: SBTFactoryJson.abi,
-    functionName: 'createMembershipSBT',
-    value: parseEther('0.01'),
+    address: tokenId as `0x${string}`,
+    abi: MembershipSBTJson.abi,
+    functionName: 'setAll',
   });
 
   const { data: txData } = useWaitForTransaction({

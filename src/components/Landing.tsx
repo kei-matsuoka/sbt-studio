@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { features } from '@/constants';
 
 export default function Landing() {
   const { openConnectModal } = useConnectModal();
@@ -31,56 +32,25 @@ export default function Landing() {
 
       <p className="font-bold text-5xl mt-20 mb-10">Feature</p>
 
-      <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-2xl hover:bg-gray-100 mb-6">
-        <img
-          className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/mint.png"
-          alt=""
-        />
-        <div className="flex flex-col justify-between p-4 pt-5 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <p className="mb-2 font-normal text-gray-700">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
+      {features.map((feature) => (
+        <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row max-w-2xl mb-6">
+          <Image
+            className="object-cover rounded-none rounded-s-lg"
+            src={feature.src}
+            alt={feature.alt}
+            width={192}
+            height={192}
+          />
+          <div className="flex flex-col justify-between p-4 pt-5 leading-normal">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+              {feature.title}
+            </h5>
+            <p className="mb-2 font-normal text-gray-700">
+              {feature.description}
+            </p>
+          </div>
         </div>
-      </div>
-
-      <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-2xl hover:bg-gray-100 mb-6">
-        <img
-          className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/mint.png"
-          alt=""
-        />
-        <div className="flex flex-col justify-between p-4 pt-5 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <p className="mb-2 font-normal text-gray-700">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-2xl hover:bg-gray-100">
-        <img
-          className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/mint.png"
-          alt=""
-        />
-        <div className="flex flex-col justify-between p-4 pt-5 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <p className="mb-2 font-normal text-gray-700">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

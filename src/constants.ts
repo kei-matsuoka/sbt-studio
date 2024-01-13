@@ -92,4 +92,39 @@ export const quickLinks = [
   },
 ];
 
+export const features = [
+  {
+    title: 'Create SBT',
+    description: 'Create your own token and distribute it to your community.',
+    src: '/mint.png',
+    alt: 'Create Token',
+  },
+  {
+    title: 'Airdrop',
+    description:
+      'Airdrop your token to your community and grow your community.',
+    src: '/airdrop.png',
+    alt: 'Airdrop Token',
+  },
+  {
+    title: 'Messaging',
+    description: 'Send messages to your community and keep them updated.',
+    src: '/messaging.png',
+    alt: 'Messaging',
+  },
+  {
+    title: 'Analytics',
+    description: 'Track your token and community growth with our analytics.',
+    src: '/analytics.png',
+    alt: 'Analytics',
+  },
+  {
+    title: 'Integration',
+    description:
+      'Integrate your token with other platforms and grow your community.',
+    src: '/integration.png',
+    alt: 'Integration',
+  },
+];
+
 export const sbtFactoryAddress = '0x80bE32C2549Fb64DDafBe34139C7D75A2BB865bf';

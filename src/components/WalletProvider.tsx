@@ -19,7 +19,9 @@ export default function WalletProvider({
   const { chains, publicClient } = configureChains(
     [polygon, polygonMumbai],
     [
-      alchemyProvider({ apiKey: 'ZXNfHjHigW2Mq9Byq_4jq23A5p0-qgO_' }),
+      alchemyProvider({
+        apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY as string,
+      }),
       publicProvider(),
     ]
   );

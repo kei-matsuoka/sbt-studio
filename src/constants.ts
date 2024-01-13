@@ -91,3 +91,5 @@ export const quickLinks = [
       'Airdrop your ERC1155 token to your community and grow your community.',
   },
 ];
+
+export const sbtFactoryAddress = '0x80bE32C2549Fb64DDafBe34139C7D75A2BB865bf';

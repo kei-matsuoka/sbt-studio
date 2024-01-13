@@ -4,18 +4,19 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
+import { parseEther } from 'viem';
 import Name from '../inputs/Name';
 import Description from '../inputs/Description';
 import ImageFile from '../inputs/ImageFile';
 import MaxSupply from '../inputs/MaxSupply';
 import BurnAuth from '../inputs/BurnAuth';
 import SubmitButton from '../SubmitButton';
-import ErrorMessage from '../ErrorMessage';
 import Loader from '../Loader';
-import SBTFactoryJson from '../../abis/SBTFactory.json';
-import { parseEther } from 'viem';
+import ErrorMessage from '../ErrorMessage';
 import { uploadImage, uploadJSON } from '@/utils/pinata';
 import { createMetadata } from '@/utils/common';
+import { sbtFactoryAddress } from '@/constants';
+import SBTFactoryJson from '../../abis/SBTFactory.json';
 
 type Inputs = {
   name: string;
@@ -42,7 +43,7 @@ export default function CreateForm() {
   });
 
   const { data, isError, write } = useContractWrite({
-    address: '0x80bE32C2549Fb64DDafBe34139C7D75A2BB865bf',
+    address: sbtFactoryAddress,
     abi: SBTFactoryJson.abi,
     functionName: 'createMembershipSBT',
     value: parseEther('0.01'),
@@ -113,27 +114,25 @@ export default function CreateForm() {
   }, [isError]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-        <Name register={register} errors={errors} />
-        <Description register={register} errors={errors} />
-        <ImageFile
-          register={register}
-          errors={errors}
-          file={file}
-          src={src}
-          handleOnChange={handleOnChange}
-        />
-        <MaxSupply register={register} />
-        <BurnAuth register={register} errors={errors} />
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <Name register={register} errors={errors} />
+      <Description register={register} errors={errors} />
+      <ImageFile
+        register={register}
+        errors={errors}
+        file={file}
+        src={src}
+        handleOnChange={handleOnChange}
+      />
+      <MaxSupply register={register} />
+      <BurnAuth register={register} errors={errors} />
 
-        {/* Submit Button */}
-        <div className="flex flex-col items-center">
-          <SubmitButton text="Create Token" />
-          {isLoading && <Loader />}
-          {isError && <ErrorMessage message="Error" />}
-        </div>
-      </form>
-    </>
+      {/* Submit Button */}
+      <div className="flex flex-col items-center">
+        <SubmitButton text="Create Token" />
+        {isLoading && <Loader />}
+        {isError && <ErrorMessage message="Error" />}
+      </div>
+    </form>
   );
 }

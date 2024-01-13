@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { useQuery } from '@apollo/client';
-import MembershipSBTJson from '@/abis/MembershipSBT.json';
 import EditName from '../inputs/EditName';
 import Description from '../inputs/Description';
 import EditImageFile from '../inputs/EditImageFile';
 import MaxSupply from '../inputs/MaxSupply';
 import BurnAuth from '../inputs/BurnAuth';
 import SubmitButton from '../SubmitButton';
-import ErrorMessage from '../ErrorMessage';
 import Loader from '../Loader';
+import ErrorMessage from '../ErrorMessage';
 import { uploadImage, uploadJSON } from '@/utils/pinata';
 import { createMetadata } from '@/utils/common';
 import { GET_CREATED_TOKEN } from '@/queries';
+import MembershipSBTJson from '@/abis/MembershipSBT.json';
 
 type Inputs = {
   name: string;
@@ -148,26 +148,24 @@ export default function EditForm() {
   }, [isError]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-        <EditName register={register} />
-        <Description register={register} errors={errors} />
-        <EditImageFile
-          register={register}
-          src={src || query.data?.createdToken.imageURI}
-          handleOnChange={handleOnChange}
-        />
-        <MaxSupply register={register} />
-        <BurnAuth register={register} errors={errors} />
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <EditName register={register} />
+      <Description register={register} errors={errors} />
+      <EditImageFile
+        register={register}
+        src={src || query.data?.createdToken.imageURI}
+        handleOnChange={handleOnChange}
+      />
+      <MaxSupply register={register} />
+      <BurnAuth register={register} errors={errors} />
 
-        {/* Submit Button */}
-        <div className="flex flex-col items-center">
-          <SubmitButton text="Create Token" />
-          {(isLoading || query.loading) && <Loader />}
-          {errorMessage && <ErrorMessage message={errorMessage} />}
-          {(isError || query.error) && <ErrorMessage message="Error" />}
-        </div>
-      </form>
-    </>
+      {/* Submit Button */}
+      <div className="flex flex-col items-center">
+        <SubmitButton text="Create Token" />
+        {(isLoading || query.loading) && <Loader />}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
+        {(isError || query.error) && <ErrorMessage message="Error" />}
+      </div>
+    </form>
   );
 }

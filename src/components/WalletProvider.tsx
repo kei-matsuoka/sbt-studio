@@ -27,7 +27,7 @@ export default function WalletProvider({
   );
 
   const { connectors } = getDefaultWallets({
-    appName: 'MonoWallet',
+    appName: 'SBT Studio',
     projectId: '8b0722834fe89703ad8f058571d46d00',
     chains,
   });

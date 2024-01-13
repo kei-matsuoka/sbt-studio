@@ -33,7 +33,10 @@ export default function Landing() {
       <p className="font-bold text-5xl mt-20 mb-10">Feature</p>
 
       {features.map((feature) => (
-        <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row max-w-2xl mb-6">
+        <div
+          className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row max-w-2xl mb-6"
+          key={feature.title}
+        >
           <Image
             className="object-cover rounded-none rounded-s-lg"
             src={feature.src}

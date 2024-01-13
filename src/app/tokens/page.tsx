@@ -7,9 +7,10 @@ import PageTitle from '@/components/PageTitle';
 import SearchInput from '@/components/SearchInput';
 import Card from '@/components/Card';
 import CardPlaceholder from '@/components/CardPlaceholder';
+import LinkButton from '@/components/LinkButton';
+import Plus from '@/components/icons/Plus';
 import { GET_CREATED_TOKENS } from '@/queries';
 import { Token } from '@/types';
-import LinkButton from '@/components/LinkButton';
 
 export default function Tokens() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,7 +34,9 @@ export default function Tokens() {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <LinkButton href="/tokens/create" text="Create Token" />
+        <LinkButton href="/tokens/create" text="Create Token">
+          <Plus />
+        </LinkButton>
       </div>
       <div className="flex flex-wrap gap-3">
         {loading

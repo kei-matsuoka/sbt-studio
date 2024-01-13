@@ -7,8 +7,6 @@ import { useQuery } from '@apollo/client';
 import PageTitle from '@/components/PageTitle';
 import SearchInput from '@/components/SearchInput';
 import TokenTable from '@/components/TokenTable';
-import { GET_CREATED_TOKEN } from '../../../queries';
-import { formatCreatedToken, formatMintedTokens } from '@/utils/token';
 import Modal from '@/components/Modal';
 import MintForm from '@/components/forms/MintForm';
 import ModalButton from '@/components/ModalButton';
@@ -16,8 +14,12 @@ import TokenTablePlaceholder from '@/components/TokenTablePlaceholder';
 import TokenDetail from '@/components/TokenDetail';
 import TokenDetailPlaceholder from '@/components/TokenDetailPlaceholder';
 import MembershipSBTJson from '@/abis/MembershipSBT.json';
-import Loader from '@/components/Loader';
 import ErrorMessage from '@/components/ErrorMessage';
+import Loader from '@/components/Loader';
+import LinkButton from '@/components/LinkButton';
+import Pencil from '@/components/icons/Pencil';
+import { GET_CREATED_TOKEN } from '../../../queries';
+import { formatCreatedToken, formatMintedTokens } from '@/utils/token';
 
 export default function Token() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -85,10 +87,15 @@ export default function Token() {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <ModalButton
-          text="Mint Token"
-          handleOnClick={() => setIsModalOpen(!isModalOpen)}
-        />
+        <div className="flex items-center gap-2">
+          <ModalButton
+            text="Mint Token"
+            handleOnClick={() => setIsModalOpen(!isModalOpen)}
+          />
+          <LinkButton href={`/tokens/${tokenId}/edit`} text="Edit Token">
+            <Pencil />
+          </LinkButton>
+        </div>
       </div>
 
       {(isLoading || txIsLoading) && <Loader />}

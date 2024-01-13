@@ -161,7 +161,7 @@ export default function EditForm() {
 
       {/* Submit Button */}
       <div className="flex flex-col items-center">
-        <SubmitButton text="Create Token" />
+        <SubmitButton text="Edit Token" />
         {(isLoading || query.loading) && <Loader />}
         {errorMessage && <ErrorMessage message={errorMessage} />}
         {(isError || query.error) && <ErrorMessage message="Error" />}

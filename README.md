@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SBT Studio
+SBT（ソウルバウンドトークン）を発行・管理できるシステムです。   
+ブロックチェーン上に誰でも簡単に会員証やクーポン等を発行できます。   
+当リポジトリはシステムのフロントエンド部分で、コントラクト部分のリポジトリは[こちら](https://github.com/kei-matsuoka/sbt-studio-contract)です。
 
-## Getting Started
+URL：[https://mono-walet-for-business.vercel.app/](https://mono-walet-for-business.vercel.app/)
 
-First, run the development server:
+<img width="922" alt="画像②" src="https://github.com/kei-matsuoka/sbt-studio/assets/46675472/dcb89947-fecb-4cd9-9fe0-0e19da998021">
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 主な使用技術
+- 言語
+  - TypeScript
+- フレームワーク
+  - Next.js
+- 主なライブラリ
+  - tailwindcss
+  - @rainbow-me/rainbowkit
+  - wagmi
+  - viem
+  - axios
+  - graphql
+  - apollo/client
+  - react-hook-form
+- ホスティング
+  - Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## システム構成図
+![SBTStudioシステム構成図](https://github.com/kei-matsuoka/sbt-studio/assets/46675472/6bff3fac-b5b2-463b-9ee3-23f8e27d1d23)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 機能一覧
+- ウォレット接続
+- サマリー表示
+- SBT一覧表示（部分一致検索）
+- SBT詳細表示
+- SBTホルダー一覧表示（部分一致検索）
+- SBT作成
+- SBT編集
+- SBTミント
+- SBTバーン
+- ERC20 Airdrop
+- ERC721 Airdrop
+- ERC1155 Airdrop（開発中）
+- メッセージ閲覧・送信（開発中）
+- ホルダーのTx分析（開発中）

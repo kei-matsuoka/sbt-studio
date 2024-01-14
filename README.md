@@ -2,6 +2,7 @@
 SBT（ソウルバウンドトークン）を発行・管理できるシステムです。   
 ブロックチェーン上に誰でも簡単に会員証やクーポン等を発行できます。   
 当リポジトリはシステムのフロントエンド部分で、コントラクト部分のリポジトリは[こちら](https://github.com/kei-matsuoka/sbt-studio-contract)です。
+対応しているチェーンはPolygon Mumbaiです。
 
 URL：[https://mono-walet-for-business.vercel.app/](https://mono-walet-for-business.vercel.app/)
 
